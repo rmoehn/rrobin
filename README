@@ -1,0 +1,47 @@
+Rrobin version 0.001
+====================
+
+Rrobin is a GUI program for managing tournaments.
+
+One can register all the playing persons and assign them to groups.
+Rrobin will generate pairings so that each player in the group will
+play against all the other players in that group (round robin). When
+you give the results of the games to Rrobin, it will compute a ranking
+of the players.
+
+
+INSTALLATION
+
+To install this module type the following:
+
+  perl Build.PL
+  ./Build
+  ./Build test
+  ./Build install
+
+
+DEPENDENCIES
+
+This module requires these other modules and libraries:
+
+ - Module::Build
+ - Log::Log4perl
+ - Games::Tournament::RoundRobin
+ - Net::CUPS, Net::CUPS::Destination (if you want printouts)
+
+
+COPYRIGHT AND LICENSE
+
+Copyright (C) 2010 Richard Möhn.
+
+This Program may be used by anyone in accordance with the terms of the
+German Free Software License.
+
+The License is attached to the LICENSE file.  The License may also be
+obtained under <http://www.d-fsl.org>. There is also a version in
+German language available, which is legally equal to the English one.
+
+The Documentation of the Program is, except where otherwise noted,
+licensed under the Creative Commons Attribution-Share Alike 3.0
+Germany license. You may obtain legal code and other information under
+<http://creativecommons.org/licenses/by-sa/3.0/de/deed.en>.
