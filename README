@@ -27,7 +27,7 @@ This module requires these other modules and libraries:
  - Module::Build
  - Log::Log4perl
  - Games::Tournament::RoundRobin
- - Net::CUPS, Net::CUPS::Destination (if you want printouts)
+ - Net::CUPS (if you want printouts)
 
 
 COPYRIGHT AND LICENSE
