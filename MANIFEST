@@ -1,2 +1,6 @@
 LICENSE
 README
+MANIFEST
+Build.PL
+script/rrobin.glade
+t/01-gui.t
