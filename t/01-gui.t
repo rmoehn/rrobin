@@ -5,7 +5,7 @@ use strict;
 use Test::More 'no_plan';
 use Test::Glade;
 
-my $test = Test::Glade->new(file => 'script/rrobin.glade');
+my $test = Test::Glade->new(file => 'lib/Games/Tournament/rrobin.glade');
 
 # the main window
 ok(my $mainwindow = $test->find_widget(

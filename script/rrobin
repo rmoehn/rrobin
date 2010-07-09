@@ -1,0 +1,40 @@
+#!/usr/bin/perl
+
+=head1 NAME
+
+rrobin - A program for managing tournaments.
+
+
+=head1 VERSION
+
+This is version 0.001.
+
+
+=head1 DESCRIPTION
+
+B<Rrobin> is a program for managing tournaments.
+One can register all the playing persons and assign them to groups.
+Rrobin will generate pairings so that each player in the group will
+play against all the other players in that group (round robin). When
+you give the results of the games to Rrobin, it will compute a ranking
+of the players.
+
+=cut
+
+
+use 5.010;
+use strict;
+use warnings;
+use lib 'lib';
+
+use Games::Tournament::Rrobin 0.001;
+
+
+our $VERSION = '0.001';
+$VERSION = eval $VERSION;
+
+
+# start up
+my $app = Games::Tournament::Rrobin->new;
+$app->{mainwindow}->show;
+$app->run;

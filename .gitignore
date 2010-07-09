@@ -1,1 +1,5 @@
 .*.swp
+blib
+_build
+Build
+MYMETA.yml

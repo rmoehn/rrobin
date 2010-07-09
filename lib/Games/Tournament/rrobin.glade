@@ -223,14 +223,20 @@
                     <property name="hscrollbar_policy">automatic</property>
                     <property name="vscrollbar_policy">automatic</property>
                     <child>
-                      <widget class="GtkTable" id="gametable">
+                      <widget class="GtkViewport" id="viewport1">
                         <property name="visible">True</property>
-                        <property name="n_columns">2</property>
+                        <property name="resize_mode">queue</property>
                         <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
+                          <widget class="GtkTable" id="gametable">
+                            <property name="visible">True</property>
+                            <property name="n_columns">2</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </widget>
                         </child>
                       </widget>
                     </child>

@@ -2,5 +2,8 @@ LICENSE
 README
 MANIFEST
 Build.PL
-script/rrobin.glade
+script/rrobin
+lib/Games/Tournament/Rrobin.pm
+lib/Games/Tournament/rrobin.glade
 t/01-gui.t
+t/02-module.t

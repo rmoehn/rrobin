@@ -15,5 +15,13 @@ my $build = Module::Build->new(
     },
     recommends  => {
         'Net::CUPS'     => 0,
+    },
+    build_requires
+                => {
+        'Test::Glade'   => 0,
     }
-)->create_build_script;
+);
+
+$build->add_build_element('glade');
+
+$build->create_build_script;
