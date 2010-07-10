@@ -20,6 +20,7 @@
                 <property name="label" translatable="yes">New</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-new</property>
+                <signal name="clicked" handler="new_clicked"/>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -32,6 +33,7 @@
                 <property name="label" translatable="yes">Open</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-open</property>
+                <signal name="clicked" handler="open_clicked"/>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -44,6 +46,7 @@
                 <property name="label" translatable="yes">Save</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-save</property>
+                <signal name="clicked" handler="save_clicked"/>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -56,6 +59,7 @@
                 <property name="label" translatable="yes">Save As</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-save-as</property>
+                <signal name="clicked" handler="saveas_clicked"/>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -72,11 +76,25 @@
               </packing>
             </child>
             <child>
+              <widget class="GtkToolButton" id="preferences">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Preferences</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-preferences</property>
+                <signal name="clicked" handler="preferences_clicked"/>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
               <widget class="GtkToolButton" id="about">
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">About</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-about</property>
+                <signal name="clicked" handler="about_clicked"/>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -112,7 +130,7 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkToolbar" id="toolbar">
+              <widget class="GtkToolbar" id="treetoolbar">
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
                 <child>
@@ -121,6 +139,7 @@
                     <property name="label" translatable="yes">Add group</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-add</property>
+                    <signal name="clicked" handler="groupadd_clicked"/>
                   </widget>
                   <packing>
                     <property name="expand">False</property>
@@ -133,6 +152,7 @@
                     <property name="label" translatable="yes">Add player</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-add</property>
+                    <signal name="clicked" handler="playeradd_clicked"/>
                   </widget>
                   <packing>
                     <property name="expand">False</property>
@@ -145,6 +165,7 @@
                     <property name="label" translatable="yes">Remove</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-remove</property>
+                    <signal name="clicked" handler="remove_clicked"/>
                   </widget>
                   <packing>
                     <property name="expand">False</property>
@@ -166,6 +187,7 @@
                     <property name="label" translatable="yes">Print</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-print</property>
+                    <signal name="clicked" handler="print_clicked"/>
                   </widget>
                   <packing>
                     <property name="expand">False</property>

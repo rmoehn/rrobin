@@ -27,8 +27,8 @@ ok(my $mainwindow = $test->find_widget(
 # the menubar
 ok($test->find_widget(
     {
-        name        => 'menubar',
-        type        => 'GtkMenuBar',
+        name        => 'maintoolbar',
+        type        => 'GtkToolbar',
         properties  =>
             {
             },
@@ -39,13 +39,13 @@ ok($test->find_widget(
             {
             },
     } ),
-    'Menubar correct.'
+    'Main toolbar correct.'
 );
 
-# the toolbar
+# the toolbar for the tree
 ok($test->find_widget(
     {
-        name        => 'toolbar',
+        name        => 'treetoolbar',
         type        => 'GtkToolbar',
         properties  =>
             {
@@ -58,7 +58,7 @@ ok($test->find_widget(
             {
             },
     } ),
-    'Toolbar correct.'
+    'Toolbar for the tree correct.'
 );
 
 # the tree of groups on the left
@@ -79,7 +79,7 @@ ok($test->find_widget(
     'Grouptree correct.'
 );
 
-# the buttons of the toolbar
+# the buttons of the toolbar for the tree
 ok($test->find_widget(
     {
         name        => 'groupadd',
@@ -94,9 +94,10 @@ ok($test->find_widget(
             },
         signals     =>
             {
+                clicked     => 'groupadd_clicked',
             },
     } ),
-    'Group-adding button correct.'
+    'Group-add button correct.'
 );
 
 ok($test->find_widget(
@@ -113,9 +114,10 @@ ok($test->find_widget(
             },
         signals     =>
             {
+                clicked     => 'playeradd_clicked',
             },
     } ),
-    'Player-adding button correct.'
+    'Player-add button correct.'
 );
 
 ok($test->find_widget(
@@ -132,10 +134,153 @@ ok($test->find_widget(
             },
         signals     =>
             {
+                clicked     => 'remove_clicked',
             },
     } ),
-    'Removing button correct.'
+    'Remove button correct.'
 );
+
+ok($test->find_widget(
+    {
+        name        => 'print',
+        type        => 'GtkToolButton',
+        properties  =>
+            {
+                label       => 'Print',
+                stock_id    => 'gtk-print',
+            },
+        packing     =>
+            {
+            },
+        signals     =>
+            {
+                clicked     => 'print_clicked',
+            },
+    } ),
+    'Print button correct.'
+);
+
+# the buttons of the main toolbar
+ok($test->find_widget(
+    {
+        name        => 'new',
+        type        => 'GtkToolButton',
+        properties  =>
+            {
+                label       => 'New',
+                stock_id    => 'gtk-new',
+            },
+        packing     =>
+            {
+            },
+        signals     =>
+            {
+                clicked     => 'new_clicked',
+            },
+    } ),
+    'Remove button correct.'
+);
+
+ok($test->find_widget(
+    {
+        name        => 'open',
+        type        => 'GtkToolButton',
+        properties  =>
+            {
+                label       => 'Open',
+                stock_id    => 'gtk-open',
+            },
+        packing     =>
+            {
+            },
+        signals     =>
+            {
+                clicked     => 'open_clicked',
+            },
+    } ),
+    'Open button correct.'
+);
+
+ok($test->find_widget(
+    {
+        name        => 'save',
+        type        => 'GtkToolButton',
+        properties  =>
+            {
+                label       => 'Save',
+                stock_id    => 'gtk-save',
+            },
+        packing     =>
+            {
+            },
+        signals     =>
+            {
+                clicked     => 'save_clicked',
+            },
+    } ),
+    'Save button correct.'
+);
+
+ok($test->find_widget(
+    {
+        name        => 'saveas',
+        type        => 'GtkToolButton',
+        properties  =>
+            {
+                label       => 'Save As',
+                stock_id    => 'gtk-save-as',
+            },
+        packing     =>
+            {
+            },
+        signals     =>
+            {
+                clicked     => 'saveas_clicked',
+            },
+    } ),
+    'Saveas button correct.'
+);
+
+ok($test->find_widget(
+    {
+        name        => 'preferences',
+        type        => 'GtkToolButton',
+        properties  =>
+            {
+                label       => 'Preferences',
+                stock_id    => 'gtk-preferences',
+            },
+        packing     =>
+            {
+            },
+        signals     =>
+            {
+                clicked     => 'preferences_clicked',
+            },
+    } ),
+    'Preferences button correct.'
+);
+
+ok($test->find_widget(
+    {
+        name        => 'about',
+        type        => 'GtkToolButton',
+        properties  =>
+            {
+                label       => 'About',
+                stock_id    => 'gtk-about',
+            },
+        packing     =>
+            {
+            },
+        signals     =>
+            {
+                clicked     => 'about_clicked',
+            },
+    } ),
+    'About button correct.'
+);
+
 
 # the table with the games
 ok($test->find_widget(
@@ -155,6 +300,7 @@ ok($test->find_widget(
     'Gametable correct.'
 );
 
+# the table with the ranking
 ok($test->find_widget(
     {
         name        => 'rankingtable',
@@ -172,6 +318,7 @@ ok($test->find_widget(
     'Rankingtable correct.'
 );
 
+# the statusbar
 ok($test->find_widget(
     {
         name        => 'statusbar',
