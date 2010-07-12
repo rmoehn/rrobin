@@ -5,5 +5,7 @@ Build.PL
 script/rrobin
 lib/Games/Tournament/Rrobin.pm
 lib/Games/Tournament/rrobin.glade
+lib/Games/Tournament/rrobin-log.conf
 t/01-gui.t
 t/02-module.t
+t/03-script.t

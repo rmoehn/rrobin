@@ -1,4 +1,8 @@
 #!/usr/bin/perl
+# As you can see just from the beginning, I follow the practice of
+# inlining the online documentation. If you should miss any 'normal'
+# comment in the code look some lines higher and you are likely to
+# encounter an explanation.
 
 =head1 NAME
 
@@ -27,14 +31,159 @@ use strict;
 use warnings;
 use lib 'lib';
 
+use Log::Log4perl ':easy';
 use Games::Tournament::Rrobin 0.001;
+use Getopt::Long qw( :config no_ignore_case bundling );
+use Pod::Usage;
 
 
 our $VERSION = '0.001';
 $VERSION = eval $VERSION;
 
 
-# start up
-my $app = Games::Tournament::Rrobin->new;
-$app->{mainwindow}->show;
+=head1 OPTIONS
+
+=cut
+
+my %Options;
+GetOptions(
+        'h|help'    => \$Options{help},
+        'v|verbose' => \$Options{verbose},
+        't|test:s'  => \$Options{test},
+        'l|log:s'   => \$Options{log}
+) or pod2usage( # exit on an unknown option
+            -exitval    => 2,
+            -verbose    => 1,
+            -output     => \*STDERR
+);
+
+
+=over
+
+=item B<-l>/B<--log> [F<filename>]
+
+Turn on logging. - This option activates Log::Log4perl using the default
+log configuration file being in the same directory as the
+L<Games::Tournament::Rrobin> module or the one you may have specified.
+The default configuration will write the log into rrobin.log in your
+current directory, by the way.
+
+Regular users do not use that option. - Regular users do not use the
+options at all.
+
+=cut
+
+if ($Options{log}) {
+    # Config file for the logger has been specified.
+    Log::Log4perl->init($Options{log});
+} elsif (defined $Options{log}) {
+    # Config file for the logger has not been specified.--Use the
+    # default one instead. Oh, we have to find it first. (It's in the
+    # the same directory as the Games::Tournament::Rrobin module.)
+    (my $log_conf = $INC{'Games/Tournament/Rrobin.pm'})
+        =~ s/Rrobin.pm/rrobin-log.conf/;
+
+    Log::Log4perl::init($log_conf);
+}
+
+
+=over
+
+=item B<-h>/B<--help>
+
+Print the documentation of the main program and exit.
+
+=cut
+
+# Help is the most important.
+if ($Options{help}) {
+    INFO "Someone wants help. Ending here.\n";
+
+    pod2usage(
+            -exitval    => 1,
+            -verbose    => 2,
+            -output     => \*STDOUT
+    );
+}
+
+
+=over
+
+=item B<-t>/B<--test>
+
+This options switches to test mode where no part of the GUI is
+shown up. Normally, it is only used by the installation routine of the
+application to test it.
+# See below for the place where it is used.
+
+=item B<-v>/B<--verbose>
+
+Be verbose. - Rrobin will spit out every useful or unuseful piece of
+information it can find. Use this option if there is a problem with the
+program and you want to report it to me.
+
+=cut
+
+if ($Options{verbose}) {
+    INFO 'Switching to verbose mode.';
+
+    Log::Log4perl->easy_init(
+        {
+            level       => $TRACE,
+            category    => 'main',
+            layout      => '%-5p %-9F{1} %3L: %m %n'
+        },
+        {   
+            level       => $TRACE,
+            category    => 'Games::Tournament::Rrobin',
+            layout      => '%-5p %-9F{1} %3L %M{1}: %m %n'
+        }
+    );
+}
+
+
+INFO 'Rrobin initialized at ', scalar(localtime), '.';
+
+
+# create the new Gtk object
+our $app = Games::Tournament::Rrobin->new;
+
+
+# A signal handler is needed to prevent the end from not being logged.
+# Maybe we'll need it later to prevent data from getting lost.
+sub handler {
+    my $sig = shift;
+    FATAL "SIG$sig caught. Exiting relatively regularly at ",
+          scalar(localtime), ".\n";
+    exit 1;
+}
+$SIG{INT}  = \&handler;
+$SIG{TERM} = \&handler;
+
+# Another signal handler which does the right things when the
+# application has been sent a SIGALRM when in testing mode.
+$SIG{ALRM} = sub {
+    INFO 'SIGALRM caught. Will shut down the regular way in order to'
+       . ' let the testing program know about the success.';
+    $app->mainwindow_quit;  
+};
+
+
+if (defined $Options{test}) {
+    INFO 'Being in testing mode I will not show the window and die'
+       . ' soon.';
+    
+    my $countdown = $Options{test} || 1;
+    alarm $countdown;
+    DEBUG "Time until SIGALRM set to $countdown seconds.";
+} else {
+    $app->{mainwindow}->show;
+    DEBUG 'GUI started.';
+}
+
+
+# start main loop
 $app->run;
+
+
+INFO 'Rrobin ended regularly at ', scalar(localtime), ".\n";
