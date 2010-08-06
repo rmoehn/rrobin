@@ -19,6 +19,14 @@ To install this module type the following:
   ./Build test
   ./Build install
 
+Notes concerning the tests:
+
+ - The run of ./Build test will take some time as Myrtscht is
+   started and then killed after one second repeatedly.
+
+ - During the tests the main window of Myrtscht will show up
+   repeatedly for about one second. - That is normal. There is only a
+   problem when the window does not disappear within 5 seconds.
 
 DEPENDENCIES
 

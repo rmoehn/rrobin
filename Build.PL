@@ -13,15 +13,16 @@ my $build = Module::Build->new(
         'Games::Tournament::RoundRobin'
                         => 0,
     },
-    recommends  => {
-        'Net::CUPS'     => 0,
-    },
     build_requires
                 => {
         'Test::Glade'   => 0,
+        'Test::Command' => 0,
     }
 );
 
+# Place also the .glade file and the configuration file for the logger
+# in the module's directory.
 $build->add_build_element('glade');
+$build->add_build_element('conf');
 
 $build->create_build_script;
